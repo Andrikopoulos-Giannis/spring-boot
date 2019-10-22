@@ -29,8 +29,8 @@ public class Order {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany
-    private List<Product> products;
+    @OneToOne
+    private Product product;
 
     public long getId() {
         return id;
@@ -80,11 +80,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }

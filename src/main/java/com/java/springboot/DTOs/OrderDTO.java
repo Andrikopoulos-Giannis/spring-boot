@@ -23,10 +23,10 @@ public class OrderDTO {
     private int alternative_address_number;
 
     @NotNull
-    private Customer customer;
+    private Long customer_id;
 
     @NotNull
-    private List<Long> products_ids;
+    private Long product_id;
 
     public long getId() {
         return id;
@@ -68,19 +68,19 @@ public class OrderDTO {
         this.alternative_address_number = alternative_address_number;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomer_id() {
+        return customer_id;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer_id(Long customer_id) {
+        this.customer_id = customer_id;
     }
 
-    public List<Long> getProducts_ids() {
-        return products_ids;
+    public Long getProduct_id() {
+        return product_id;
     }
 
-    public void setProducts_ids(List<Long> products_ids) {
-        this.products_ids = products_ids;
+    public void setProduct_id(Long product_id) {
+        this.product_id = product_id;
     }
 }
