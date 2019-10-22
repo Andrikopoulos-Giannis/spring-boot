@@ -1,11 +1,10 @@
 package com.java.springboot.DTOs;
 
-import com.java.springboot.Models.Order;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class ProductDTo {
+public class ProductDTO {
 
         private long id;
 

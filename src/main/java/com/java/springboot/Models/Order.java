@@ -1,7 +1,6 @@
 package com.java.springboot.Models;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,11 +26,9 @@ public class Order {
     @Column(name = "ALTERNATIVE_ADDRESS_NUMBER")
     private int alternative_address_number;
 
-    @Column(name = "CUSTOMERS", nullable = false)
-    @OneToOne
+    @ManyToOne
     private Customer customer;
 
-    @Column(name = "PRODUCTS", nullable = false)
     @OneToMany
     private List<Product> products;
 

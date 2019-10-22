@@ -1,7 +1,6 @@
 package com.java.springboot.Models;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,7 +27,6 @@ public class Product {
     @Column(name = "INVENTORY", nullable = false)
     private int inventory;
 
-    @Column(name = "ORDERS")
     @OneToMany
     private List<Order> orders;
 

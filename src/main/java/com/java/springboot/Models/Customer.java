@@ -49,7 +49,6 @@ public class Customer {
     @Length(max = 100)
     private String email;
 
-    @Column(name = "ORDERS")
     @OneToMany
     private List<Order> orders;
 
