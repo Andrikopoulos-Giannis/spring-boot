@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "CUSTOMERS")
@@ -47,6 +48,10 @@ public class Customer {
     @Column(name = "EMAIL", nullable = false)
     @Length(max = 100)
     private String email;
+
+    @Column(name = "ORDERS")
+    @OneToMany
+    private List<Order> orders;
 
 
     public long getId() {
@@ -119,5 +124,13 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
