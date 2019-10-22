@@ -15,7 +15,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping(path = "/product/addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/addOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String create(@RequestBody OrderDTO orderDTO){
 
         return orderService.create(orderDTO);

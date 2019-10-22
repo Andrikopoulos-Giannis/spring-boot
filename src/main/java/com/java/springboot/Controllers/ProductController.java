@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @PostMapping(path = "/addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String create(@RequestBody ProductDTO productDTO){
 
-        productService.create(productDTO);
-
-        return  "Product saved Successfully";
+       return productService.create(productDTO);
 
     }
 

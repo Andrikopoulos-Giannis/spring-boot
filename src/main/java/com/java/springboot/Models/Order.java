@@ -21,10 +21,10 @@ public class Order {
 
     @Column(name = "ALTERNATIVE_ADDRESS")
     @Length(max = 100)
-    private String alternative_address;
+    private String alternativeAddress;
 
     @Column(name = "ALTERNATIVE_ADDRESS_NUMBER")
-    private int alternative_address_number;
+    private int alternativeAddressNumber;
 
     @ManyToOne
     private Customer customer;
@@ -56,20 +56,20 @@ public class Order {
         this.amount = amount;
     }
 
-    public String getAlternative_address() {
-        return alternative_address;
+    public String getAlternativeAddress() {
+        return alternativeAddress;
     }
 
-    public void setAlternative_address(String alternative_address) {
-        this.alternative_address = alternative_address;
+    public void setAlternativeAddress(String alternativeAddress) {
+        this.alternativeAddress = alternativeAddress;
     }
 
-    public int getAlternative_address_number() {
-        return alternative_address_number;
+    public int getAlternativeAddressNumber() {
+        return alternativeAddressNumber;
     }
 
-    public void setAlternative_address_number(int alternative_address_number) {
-        this.alternative_address_number = alternative_address_number;
+    public void setAlternativeAddressNumber(int alternativeAddressNumber) {
+        this.alternativeAddressNumber = alternativeAddressNumber;
     }
 
     public Customer getCustomer() {

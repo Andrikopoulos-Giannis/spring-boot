@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.io.Serializable;
 import java.util.Date;
 
-public class CustomerDTO implements Serializable {
+public class CustomerDTO {
 
     private long id;
 
@@ -25,8 +24,7 @@ public class CustomerDTO implements Serializable {
 
     @NotNull
     @Positive
-    private int zip_code;
-
+    private int zipCode;
 
     @Length(max = 100)
     @NotNull
@@ -34,11 +32,11 @@ public class CustomerDTO implements Serializable {
 
     @NotNull
     @Positive
-    private int address_number;
+    private int addressNumber;
 
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date_of_birth;
+    private Date dateOfBirth;
 
     @Length(max = 100)
     @NotNull
@@ -76,12 +74,12 @@ public class CustomerDTO implements Serializable {
         this.city = city;
     }
 
-    public int getZip_code() {
-        return zip_code;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(int zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getAddress() {
@@ -92,25 +90,23 @@ public class CustomerDTO implements Serializable {
         this.address = address;
     }
 
-    public int getAddress_number() {
-        return address_number;
+    public int getAddressNumber() {
+        return addressNumber;
     }
 
-    public void setAddress_number(int address_number) {
-        this.address_number = address_number;
+    public void setAddressNumber(int addressNumber) {
+        this.addressNumber = addressNumber;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
     public void setEmail(String email) {
         this.email = email;

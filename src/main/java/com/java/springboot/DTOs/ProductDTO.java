@@ -9,7 +9,7 @@ public class ProductDTO {
         private long id;
 
         @NotNull
-        private long product_code;
+        private long productCode;
 
         @Length(max = 100)
         @NotNull
@@ -21,7 +21,7 @@ public class ProductDTO {
         @NotNull
         private int inventory;
 
-        private List<Long> orders_ids;
+        private List<Long> orderIds;
 
     public long getId() {
         return id;
@@ -31,12 +31,12 @@ public class ProductDTO {
         this.id = id;
     }
 
-    public long getProduct_code() {
-        return product_code;
+    public long getProductCode() {
+        return productCode;
     }
 
-    public void setProduct_code(long product_code) {
-        this.product_code = product_code;
+    public void setProductCode(long productCode) {
+        this.productCode = productCode;
     }
 
     public String getDescription() {
@@ -63,11 +63,11 @@ public class ProductDTO {
         this.inventory = inventory;
     }
 
-    public List<Long> getOrders_ids() {
-        return orders_ids;
+    public List<Long> getOrderIds() {
+        return orderIds;
     }
 
-    public void setOrders_ids(List<Long> orders_ids) {
-        this.orders_ids = orders_ids;
+    public void setOrderIds(List<Long> orderIds) {
+        this.orderIds = orderIds;
     }
 }

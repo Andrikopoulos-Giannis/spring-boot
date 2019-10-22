@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -15,14 +16,27 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional
-    public void create(ProductDTO productDTO) {
+    public String create(ProductDTO productDTO) {
 
-        Product product = new Product();
-        product.setDescription(productDTO.getDescription());
-        product.setProduct_code(productDTO.getProduct_code());
-        product.setPrice(productDTO.getPrice());
-        product.setInventory(productDTO.getInventory());
+        try{
+            Optional<Product> prod = productRepository.findByProduct_code(productDTO.getProductCode());
+            if (!prod.isPresent()){
+                Product product = new Product();
+                product.setDescription(productDTO.getDescription());
+                product.setProductCode(productDTO.getProductCode());
+                product.setPrice(productDTO.getPrice());
+                product.setInventory(productDTO.getInventory());
 
-        productRepository.save(product);
+                productRepository.save(product);
+                return  "Product saved Successfully!";
+            }else
+            {
+                return  "Product already exists.";
+            }
+        }catch (Exception ex){
+            return "Something went wrong:" + ex.toString();
+        }
+
+
     }
 }

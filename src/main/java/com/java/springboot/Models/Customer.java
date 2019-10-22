@@ -31,7 +31,7 @@ public class Customer {
 
     @Column(name = "ZIP_CODE", nullable =false)
     @Positive
-    private int zip_code;
+    private int zipCode;
 
     @Column(name = "ADDRESS", nullable =false)
     @Length(max = 100)
@@ -39,11 +39,11 @@ public class Customer {
 
     @Column(name = "ADDRESS_NUMBER", nullable =false)
     @Positive
-    private int address_number;
+    private int addressNumber;
 
     @Column(name = "BIRTH_DATE", nullable =false)
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date date_of_birth;
+    private Date dateOfBirth;
 
     @Column(name = "EMAIL", nullable = false)
     @Length(max = 100)
@@ -85,12 +85,12 @@ public class Customer {
         this.city = city;
     }
 
-    public int getZip_code() {
-        return zip_code;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(int zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getAddress() {
@@ -101,20 +101,20 @@ public class Customer {
         this.address = address;
     }
 
-    public int getAddress_number() {
-        return address_number;
+    public int getAddressNumber() {
+        return addressNumber;
     }
 
-    public void setAddress_number(int address_number) {
-        this.address_number = address_number;
+    public void setAddressNumber(int addressNumber) {
+        this.addressNumber = addressNumber;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getEmail() {
