@@ -41,7 +41,7 @@ public class OrderService {
                         order.setAmount(product.get().getPrice() * orderDTO.getQuantity());
                         order.setCustomer(customer.get());
                         orderRepository.save(order);
-                        //TODO: Update Product inventory
+                        productRepository.updateInventory((product.get().getInventory() - orderDTO.getQuantity()), product.get().getId());//Update product
                         return "Your Order created successfully!";
                     }else{
                         return "Order quantity is greater than product inventory.";
