@@ -3,6 +3,7 @@ package com.java.springboot.Services;
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
 import com.java.springboot.Models.Customer;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -19,16 +20,12 @@ public class CustomerService {
         try {
             Optional<Customer> cust = customerRepository.findByEmail(customerDTO.getEmail());
             if (!cust.isPresent()){
+
                 Customer customer = new Customer();
-                customer.setName(customerDTO.getName());
-                customer.setSurname(customerDTO.getSurname());
-                customer.setAddress(customerDTO.getAddress());
-                customer.setAddressNumber(customerDTO.getAddressNumber());
-                customer.setCity(customerDTO.getCity());
-                customer.setDateOfBirth(customerDTO.getDateOfBirth());
-                customer.setEmail(customerDTO.getEmail());
-                customer.setZipCode(customerDTO.getZipCode());
+                ModelMapper modelMapper = new ModelMapper();
+                modelMapper.map(customerDTO, customer);
                 customerRepository.save(customer);
+
                 return "Customer saved successfully!";
             }else
             {

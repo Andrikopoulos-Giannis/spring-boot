@@ -17,16 +17,18 @@ public class CustomerMapper {
 
         mapper.addMappings(new PropertyMap<CustomerDTO, Customer>() {
             @Override
-            protected  void configure(){}
+            protected  void configure() {
+                map().setName(source.getName());
+                map().setSurname(source.getSurname());
+                map().setZipCode(source.getZipCode());
+                map().setDateOfBirth(source.getDateOfBirth());
+                map().setAddress(source.getAddress());
+                map().setAddressNumber(source.getAddressNumber());
+                map().setCity(source.getCity());
+                map().setEmail(source.getEmail());
+            }
         });
 
-        mapper.getTypeMap(CustomerDTO.class, Customer.class).setPostConverter(mappingContext ->{
-            Customer customer = mappingContext.getDestination();
-            //customer.
-            return  customer;
-        });
     }
-
-
 
 }
