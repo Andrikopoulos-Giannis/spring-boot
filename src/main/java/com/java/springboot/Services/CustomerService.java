@@ -36,4 +36,18 @@ public class CustomerService {
         }
 
     }
+
+    @Transactional
+    public CustomerDTO getById(Long customerId){
+
+        try {
+            Customer customer = customerRepository.findById(customerId).get();
+            CustomerDTO customerDTO = new CustomerDTO();
+            ModelMapper modelMapper = new ModelMapper();
+            modelMapper.map(customer, customerDTO);
+            return customerDTO;
+        }catch (Exception ex){
+            return null;
+        }
+    }
 }

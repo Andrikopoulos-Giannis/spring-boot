@@ -1,28 +1,32 @@
 package com.java.springboot.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.java.springboot.Models.Order;
 import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.Date;
+import java.util.List;
 
 public class CustomerDTO {
 
     private long id;
 
     @Length(max = 100)
-    @NotNull
+    @NotEmpty
     private String name;
 
     @Length(max = 100)
-    @NotNull
+    @NotEmpty
     private String surname;
 
     @Length(max = 100)
-    @NotNull
+    @NotEmpty
     private String city;
 
-    @NotNull
+    @NotEmpty
     @Positive
     private int zipCode;
 
@@ -30,7 +34,7 @@ public class CustomerDTO {
     @NotNull
     private String address;
 
-    @NotNull
+    @NotEmpty
     @Positive
     private int addressNumber;
 
@@ -39,8 +43,12 @@ public class CustomerDTO {
     private Date dateOfBirth;
 
     @Length(max = 100)
-    @NotNull
+    @NotEmpty
     private String email;
+
+    private List<Long> orders;
+
+
 
     public long getId() {
         return id;
@@ -110,5 +118,13 @@ public class CustomerDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Long> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Long> orders) {
+        this.orders = orders;
     }
 }

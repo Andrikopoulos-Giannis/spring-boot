@@ -1,16 +1,17 @@
 package com.java.springboot.DTOs;
 
 import org.hibernate.validator.constraints.Length;
-import javax.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotEmpty;
 
 public class OrderDTO {
 
     private long id;
 
-    @NotNull
+    @NotEmpty
     private int quantity;
 
-    @NotNull
+    @NotEmpty
     private float amount;
 
     @Length(max = 100)
@@ -18,10 +19,10 @@ public class OrderDTO {
 
     private int alternativeAddressNumber;
 
-    @NotNull
+    @NotEmpty
     private Long customerId;
 
-    @NotNull
+    @NotEmpty
     private Long productId;
 
     public long getId() {

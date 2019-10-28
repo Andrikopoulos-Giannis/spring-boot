@@ -1,6 +1,7 @@
 package com.java.springboot.Models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -49,7 +50,7 @@ public class Customer {
     @Length(max = 100)
     private String email;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Order> orders;
 
 

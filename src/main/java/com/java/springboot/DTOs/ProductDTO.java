@@ -1,27 +1,28 @@
 package com.java.springboot.DTOs;
 
 import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class ProductDTO {
+    private long id;
 
-        private long id;
+    @NotEmpty
+    private long productCode;
 
-        @NotNull
-        private long productCode;
+    @Length(max = 100)
+    @NotEmpty
+    private String description;
 
-        @Length(max = 100)
-        @NotNull
-        private String description;
+    @NotEmpty
+    private int price;
 
-        @NotNull
-        private int price;
+    @NotNull
+    private int inventory;
 
-        @NotNull
-        private int inventory;
-
-        private List<Long> orderIds;
+    private List<Long> orders;
 
     public long getId() {
         return id;
@@ -63,11 +64,11 @@ public class ProductDTO {
         this.inventory = inventory;
     }
 
-    public List<Long> getOrderIds() {
-        return orderIds;
+    public List<Long> getOrders() {
+        return orders;
     }
 
-    public void setOrderIds(List<Long> orderIds) {
-        this.orderIds = orderIds;
+    public void setOrders(List<Long> orders) {
+        this.orders = orders;
     }
 }
