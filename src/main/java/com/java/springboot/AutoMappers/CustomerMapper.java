@@ -3,7 +3,6 @@ package com.java.springboot.AutoMappers;
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.Models.Customer;
 import com.java.springboot.Models.Order;
-import org.hibernate.mapping.Collection;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
