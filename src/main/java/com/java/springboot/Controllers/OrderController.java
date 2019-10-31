@@ -4,9 +4,7 @@ import com.java.springboot.DTOs.OrderDTO;
 import com.java.springboot.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OrderController {
@@ -18,6 +16,13 @@ public class OrderController {
     public String create(@RequestBody OrderDTO orderDTO){
 
         return orderService.create(orderDTO);
+
+    }
+
+    @GetMapping(path = "/order", produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderDTO findById(@RequestParam("id") Long orderId) {
+
+        return orderService.getById(orderId);
 
     }
 }
