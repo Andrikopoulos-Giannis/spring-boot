@@ -3,7 +3,7 @@ package com.java.springboot.Models;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ORDERS")
@@ -27,9 +27,11 @@ public class Order {
     private int alternativeAddressNumber;
 
     @ManyToOne
+    @NotNull
     private Customer customer;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
     private Product product;
 
     public long getId() {

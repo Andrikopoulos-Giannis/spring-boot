@@ -3,9 +3,6 @@ package com.java.springboot.AutoMappers;
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.Models.Customer;
 import com.java.springboot.Models.Order;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -13,40 +10,37 @@ import java.util.stream.Collectors;
 @Component
 public class CustomerMapper {
 
-    private ModelMapper mapper = new ModelMapper();
+    public Customer DtoToCustomer(CustomerDTO customerDTO){
 
-    public CustomerMapper(){
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        Customer customer = new Customer();
+        customer.setName(customerDTO.getName());
+        customer.setSurname(customerDTO.getSurname());
+        customer.setZipCode(customerDTO.getZipCode());
+        customer.setDateOfBirth(customerDTO.getDateOfBirth());
+        customer.setAddress(customerDTO.getAddress());
+        customer.setAddressNumber(customerDTO.getAddressNumber());
+        customer.setCity(customerDTO.getCity());
+        customer.setEmail(customerDTO.getEmail());
 
-        mapper.addMappings(new PropertyMap<CustomerDTO, Customer>() {
-            @Override
-            protected  void configure() {
-                map().setName(source.getName());
-                map().setSurname(source.getSurname());
-                map().setZipCode(source.getZipCode());
-                map().setDateOfBirth(source.getDateOfBirth());
-                map().setAddress(source.getAddress());
-                map().setAddressNumber(source.getAddressNumber());
-                map().setCity(source.getCity());
-                map().setEmail(source.getEmail());
-            }
-        });
-
-        mapper.addMappings(new PropertyMap<Customer, CustomerDTO>() {
-            @Override
-            protected void configure(){
-                map().setName(source.getName());
-                map().setSurname(source.getSurname());
-                map().setZipCode(source.getZipCode());
-                map().setDateOfBirth(source.getDateOfBirth());
-                map().setAddress(source.getAddress());
-                map().setAddressNumber(source.getAddressNumber());
-                map().setCity(source.getCity());
-                map().setEmail(source.getEmail());
-                map().setOrders(source.getOrders().stream().map(Order::getId).collect(Collectors.toList()));
-            }
-        });
-
+        return  customer;
     }
+
+   public CustomerDTO customerToDTO(Customer customer){
+
+       CustomerDTO customerDTO = new CustomerDTO();
+       customerDTO.setId(customer.getId());
+       customerDTO.setName(customer.getName());
+       customerDTO.setSurname(customer.getSurname());
+       customerDTO.setZipCode(customer.getZipCode());
+       customerDTO.setDateOfBirth(customer.getDateOfBirth());
+       customerDTO.setAddress(customer.getAddress());
+       customerDTO.setAddressNumber(customer.getAddressNumber());
+       customerDTO.setCity(customer.getCity());
+       customerDTO.setEmail(customer.getEmail());
+       customerDTO.setOrders(customer.getOrders().stream().map(Order::getId).collect(Collectors.toList()));
+
+       return  customerDTO;
+    }
+
 
 }

@@ -1,7 +1,6 @@
 package com.java.springboot.Controllers;
 
 import com.java.springboot.DTOs.OrderDTO;
-import com.java.springboot.Models.Order;
 import com.java.springboot.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

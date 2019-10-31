@@ -1,7 +1,6 @@
 package com.java.springboot.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.java.springboot.Models.Order;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
