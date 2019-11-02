@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("FROM Product product WHERE product.productCode LIKE :productCode")
-    Optional<Product> findByProduct_code(@Param("productCode") Long productCode);
+    Optional<Product> findByProduct_code(@Param("productCode") String productCode);
 
     @Modifying
     @Query("UPDATE Product product SET product.inventory = :inventory WHERE product.id = :productId")

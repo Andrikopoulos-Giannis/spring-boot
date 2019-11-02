@@ -1,11 +1,13 @@
 package com.java.springboot.DTOs;
 
+
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-public class OrderDTO {
+public class FullOrderDTO {
 
     private long id;
 
@@ -20,11 +22,11 @@ public class OrderDTO {
 
     private int alternativeAddressNumber;
 
-    @NotNull
-    private Long customerId;
+    @NotEmpty
+    private CustomerDTO customer;
 
-    @NotNull
-    private Long productId;
+    @NotEmpty
+    private ProductDTO product;
 
     public long getId() {
         return id;
@@ -66,19 +68,19 @@ public class OrderDTO {
         this.alternativeAddressNumber = alternativeAddressNumber;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public CustomerDTO getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
     }
 
-    public Long getProductId() {
-        return productId;
+    public ProductDTO getProduct() {
+        return product;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProduct(ProductDTO product) {
+        this.product = product;
     }
 }

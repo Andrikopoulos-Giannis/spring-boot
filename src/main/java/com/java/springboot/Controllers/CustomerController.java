@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 public class CustomerController {
@@ -14,7 +16,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping(path = "/SignUp", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@RequestBody CustomerDTO customerDTO){
+    public String create(@Valid @RequestBody CustomerDTO customerDTO){
 
         return customerService.create(customerDTO);
     }

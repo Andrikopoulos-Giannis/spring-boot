@@ -25,7 +25,7 @@ public class CustomerDTO {
     @NotEmpty
     private String city;
 
-    @NotEmpty
+    @NotNull
     @Positive
     private int zipCode;
 
@@ -33,7 +33,7 @@ public class CustomerDTO {
     @NotNull
     private String address;
 
-    @NotEmpty
+    @NotNull
     @Positive
     private int addressNumber;
 

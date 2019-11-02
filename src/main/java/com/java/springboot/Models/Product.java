@@ -15,7 +15,7 @@ public class Product {
     private long id;
 
     @Column(name = "PRODUCT_CODE", nullable = false)
-    private long productCode;
+    private String productCode;
 
     @Column(name = "DESCRIPTION", nullable = false)
     @Length(max = 100)
@@ -38,11 +38,11 @@ public class Product {
         this.id = id;
     }
 
-    public long getProductCode() {
+    public String getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(long productCode) {
+    public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
 

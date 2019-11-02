@@ -4,9 +4,9 @@ import com.java.springboot.DTOs.ProductDTO;
 import com.java.springboot.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 public class ProductController {
@@ -15,10 +15,15 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping(path = "/addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@RequestBody ProductDTO productDTO){
+    public String create(@Valid @RequestBody ProductDTO productDTO){
 
        return productService.create(productDTO);
 
     }
 
+
+    @GetMapping(path = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ProductDTO findById(@RequestParam("id") Long productId){
+        return productService.getProductById(productId);
+    }
 }
