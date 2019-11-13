@@ -30,7 +30,7 @@ public class Order {
     @NotNull
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @NotNull
     private Product product;
 

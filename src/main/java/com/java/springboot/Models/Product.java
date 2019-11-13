@@ -27,7 +27,7 @@ public class Product {
     @Column(name = "INVENTORY", nullable = false)
     private int inventory;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(mappedBy = "product")
     private List<Order> orders;
 
     public long getId() {
