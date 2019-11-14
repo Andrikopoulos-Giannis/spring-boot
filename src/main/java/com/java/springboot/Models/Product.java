@@ -3,6 +3,8 @@ package com.java.springboot.Models;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -27,8 +29,12 @@ public class Product {
     @Column(name = "INVENTORY", nullable = false)
     private int inventory;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    private Category category;
 
     public long getId() {
         return id;
@@ -76,5 +82,13 @@ public class Product {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

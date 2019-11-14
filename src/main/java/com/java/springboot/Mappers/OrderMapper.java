@@ -1,4 +1,4 @@
-package com.java.springboot.AutoMappers;
+package com.java.springboot.Mappers;
 
 import com.java.springboot.DTOs.OrderDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
@@ -20,10 +20,10 @@ public class OrderMapper {
         Order order = new Order();
         order.setAlternativeAddressNumber(orderDTO.getAlternativeAddressNumber());
         order.setAlternativeAddress(orderDTO.getAlternativeAddress());
-        order.setAmount(productRepository.findById(orderDTO.getProductId()).get().getPrice() * orderDTO.getQuantity());
+        order.setAmount(productRepository.findById(orderDTO.getProduct()).get().getPrice() * orderDTO.getQuantity());
         order.setQuantity(orderDTO.getQuantity());
-        order.setCustomer(customerRepository.findById(orderDTO.getCustomerId()).get());
-        order.setProduct(productRepository.findById(orderDTO.getProductId()).get());
+        order.setCustomer(customerRepository.findById(orderDTO.getCustomer()).get());
+        order.setProduct(productRepository.findById(orderDTO.getProduct()).get());
 
         return order;
     }
@@ -36,7 +36,7 @@ public class OrderMapper {
         orderDTO.setAlternativeAddress(order.getAlternativeAddress());
         orderDTO.setAlternativeAddressNumber(order.getAlternativeAddressNumber());
         orderDTO.setAmount(order.getAmount());
-        orderDTO.setCustomerId(order.getCustomer().getId());
+        orderDTO.setCustomer(order.getCustomer().getId());
         orderDTO.setProductId(order.getProduct().getId());
 
         return orderDTO;

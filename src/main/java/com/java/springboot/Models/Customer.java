@@ -49,7 +49,7 @@ public class Customer {
     @Length(max = 100)
     private String email;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     private List<Order> orders;
 
 

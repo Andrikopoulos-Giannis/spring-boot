@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping(path = "/addOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@Valid @RequestBody OrderDTO orderDTO){
+    public String create(@Valid @NotNull @RequestBody OrderDTO orderDTO){
 
         return orderService.create(orderDTO);
 

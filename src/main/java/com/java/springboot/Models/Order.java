@@ -26,11 +26,11 @@ public class Order {
     @Column(name = "ALTERNATIVE_ADDRESS_NUMBER")
     private int alternativeAddressNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     private Product product;
 

@@ -1,6 +1,6 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.AutoMappers.CustomerMapper;
+import com.java.springboot.Mappers.CustomerMapper;
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
 import com.java.springboot.Models.Customer;
@@ -33,7 +33,7 @@ public class CustomerService {
                 return "Customer already exists.";
             }
         }catch (Exception ex){
-            return "Something went wrong:" + ex.toString();
+            return "Something went wrong";
         }
 
     }

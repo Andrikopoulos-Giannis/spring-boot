@@ -1,8 +1,10 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.AutoMappers.ProductMapper;
+import com.java.springboot.JpaRepositories.CategoryRepository;
+import com.java.springboot.Mappers.ProductMapper;
 import com.java.springboot.DTOs.ProductDTO;
 import com.java.springboot.JpaRepositories.ProductRepository;
+import com.java.springboot.Models.Category;
 import com.java.springboot.Models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,21 +21,29 @@ public class ProductService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Transactional
     public String create(ProductDTO productDTO) {
 
         try{
             Optional<Product> prod = productRepository.findByProduct_code(productDTO.getProductCode());
             if (!prod.isPresent()){
-                Product product = productMapper.DtoToProduct(productDTO);
-                productRepository.save(product);
-                return  "Product saved Successfully!";
+                Optional<Category> category = categoryRepository.findById(productDTO.getCategory());
+                if (category.isPresent()) {
+                    Product product = productMapper.DtoToProduct(productDTO);
+                    productRepository.save(product);
+                    return "Product saved Successfully!";
+                }else{
+                    return "Category not exists";
+                }
             }else
             {
                 return  "Product already exists.";
             }
         }catch (Exception ex){
-            return "Something went wrong:" + ex.toString();
+            return "Something went wrong";
         }
 
 

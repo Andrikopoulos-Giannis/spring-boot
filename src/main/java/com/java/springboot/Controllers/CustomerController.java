@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 @RestController
@@ -16,7 +17,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping(path = "/SignUp", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@Valid @RequestBody CustomerDTO customerDTO){
+    public String create(@Valid @NotNull @RequestBody CustomerDTO customerDTO){
 
         return customerService.create(customerDTO);
     }

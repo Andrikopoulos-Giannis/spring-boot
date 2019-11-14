@@ -1,7 +1,7 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.AutoMappers.FullOrderMapper;
-import com.java.springboot.AutoMappers.OrderMapper;
+import com.java.springboot.Mappers.FullOrderMapper;
+import com.java.springboot.Mappers.OrderMapper;
 import com.java.springboot.DTOs.OrderDTO;
 import com.java.springboot.DTOs.FullOrderDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
@@ -38,9 +38,9 @@ public class OrderService {
     @Transactional
     public String create(OrderDTO orderDTO) {
         try {
-            Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomerId());
+            Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomer());
             if (customer.isPresent()) {
-                Optional<Product> product = productRepository.findById(orderDTO.getProductId());
+                Optional<Product> product = productRepository.findById(orderDTO.getProduct());
                 if (product.isPresent()) {
                     if (product.get().getInventory()>= orderDTO.getQuantity()){
                         Order order = orderMapper.DtoToOrder(orderDTO);
@@ -58,7 +58,7 @@ public class OrderService {
                 return "Customer not exists.";
             }
         } catch (Exception ex) {
-            return "Something went wrong:" + ex.toString();
+            return "Something went wrong";
 
         }
     }

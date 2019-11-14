@@ -1,4 +1,4 @@
-package com.java.springboot.AutoMappers;
+package com.java.springboot.Mappers;
 
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.Models.Customer;
