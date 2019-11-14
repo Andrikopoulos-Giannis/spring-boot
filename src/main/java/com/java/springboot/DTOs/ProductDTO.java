@@ -24,7 +24,7 @@ public class ProductDTO {
     @PositiveOrZero
     private int inventory;
 
-    private List<Long> orders;
+    private List<Long> orderItems;
 
     @NotNull
     private Long category;
@@ -69,12 +69,12 @@ public class ProductDTO {
         this.inventory = inventory;
     }
 
-    public List<Long> getOrders() {
-        return orders;
+    public List<Long> getOrderItems() {
+        return orderItems;
     }
 
-    public void setOrders(List<Long> orders) {
-        this.orders = orders;
+    public void setOrderItems(List<Long> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public Long getCategory() {

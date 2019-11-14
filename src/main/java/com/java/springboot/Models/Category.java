@@ -11,6 +11,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "NAME", nullable = false)
@@ -18,12 +19,15 @@ public class Category {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "PARENT_CATEGORY")
     private Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)
+    @Column(name = "SUB_CATEGORIES")
     private List<Category> subCategories;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @Column(name = "PRODUCTS")
     private List<Product> products;
 
     public Long getId() {

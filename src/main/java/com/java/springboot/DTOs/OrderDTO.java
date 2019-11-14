@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 public class OrderDTO {
 
@@ -24,7 +25,7 @@ public class OrderDTO {
     private Long customer;
 
     @NotNull
-    private Long product;
+    private List<Long> orderItems;
 
     public long getId() {
         return id;
@@ -74,11 +75,11 @@ public class OrderDTO {
         this.customer = customer;
     }
 
-    public Long getProduct() {
-        return product;
+    public List<Long> getOrderItems() {
+        return orderItems;
     }
 
-    public void setProductId(Long product) {
-        this.product = product;
+    public void setOrderItems(List<Long> orderItems) {
+        this.orderItems = orderItems;
     }
 }

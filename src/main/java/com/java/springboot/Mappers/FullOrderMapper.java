@@ -2,6 +2,8 @@ package com.java.springboot.Mappers;
 
 
 import com.java.springboot.DTOs.FullOrderDTO;
+import com.java.springboot.DTOs.OrderItemDTO;
+import com.java.springboot.JpaRepositories.OrderItemRepository;
 import com.java.springboot.Models.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +19,10 @@ public class FullOrderMapper {
     private CustomerMapper customerMapper;
 
     @Autowired
-    private ProductMapper productMapper;
+    private OrderItemMapper orderItemMapper;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     public FullOrderDTO orderToDto(Order order){
         FullOrderDTO fullOrderDTO = new FullOrderDTO();
@@ -27,7 +32,9 @@ public class FullOrderMapper {
         fullOrderDTO.setAmount(order.getAmount());
         fullOrderDTO.setQuantity(order.getQuantity());
         fullOrderDTO.setCustomer(customerMapper.customerToDTO(order.getCustomer()));
-        fullOrderDTO.setProduct(productMapper.ProductToDTO(order.getProduct()));
+        List<OrderItemDTO> orderItems = new ArrayList<>();
+        order.getOrderItems().forEach(orderItem -> orderItems.add(orderItemMapper.orderItemToDto(orderItem)));
+        fullOrderDTO.setOrderItems(orderItems);
 
         return  fullOrderDTO;
     }

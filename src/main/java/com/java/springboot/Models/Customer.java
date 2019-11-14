@@ -50,6 +50,7 @@ public class Customer {
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @Column(name = "ORDER")
     private List<Order> orders;
 
 

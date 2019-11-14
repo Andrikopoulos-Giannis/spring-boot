@@ -1,5 +1,6 @@
 package com.java.springboot.Services;
 
+import com.java.springboot.JpaRepositories.OrderItemRepository;
 import com.java.springboot.Mappers.FullOrderMapper;
 import com.java.springboot.Mappers.OrderMapper;
 import com.java.springboot.DTOs.OrderDTO;
@@ -9,6 +10,7 @@ import com.java.springboot.JpaRepositories.OrderRepository;
 import com.java.springboot.JpaRepositories.ProductRepository;
 import com.java.springboot.Models.Customer;
 import com.java.springboot.Models.Order;
+import com.java.springboot.Models.OrderItem;
 import com.java.springboot.Models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class OrderService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private OrderItemRepository orderItemRepository;
 
     @Autowired
     private OrderMapper orderMapper;
@@ -40,8 +42,9 @@ public class OrderService {
         try {
             Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomer());
             if (customer.isPresent()) {
-                Optional<Product> product = productRepository.findById(orderDTO.getProduct());
-                if (product.isPresent()) {
+                List<Long> orderItems = orderDTO.getOrderItems();
+                boolean orderItemNotExists = orderItems.stream().anyMatch(orderItem -> !orderRepository.existsById(orderItem));
+                if (!orderItemNotExists) {
                     if (product.get().getInventory()>= orderDTO.getQuantity()){
                         Order order = orderMapper.DtoToOrder(orderDTO);
                         orderRepository.save(order);

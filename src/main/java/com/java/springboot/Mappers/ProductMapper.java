@@ -2,7 +2,7 @@ package com.java.springboot.Mappers;
 
 import com.java.springboot.DTOs.ProductDTO;
 import com.java.springboot.JpaRepositories.CategoryRepository;
-import com.java.springboot.Models.Order;
+import com.java.springboot.Models.OrderItem;
 import com.java.springboot.Models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class ProductMapper {
          productDTO.setProductCode(product.getProductCode());
          productDTO.setPrice(product.getPrice());
          productDTO.setInventory(product.getInventory());
-         productDTO.setOrders(product.getOrders().stream().map(Order::getId).collect(Collectors.toList()));
+         productDTO.setOrderItems(product.getOrderItems().stream().map(OrderItem::getId).collect(Collectors.toList()));
          productDTO.setCategory(product.getCategory().getId());
 
          return productDTO;

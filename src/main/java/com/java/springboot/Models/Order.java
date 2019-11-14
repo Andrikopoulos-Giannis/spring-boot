@@ -3,7 +3,7 @@ package com.java.springboot.Models;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
@@ -11,6 +11,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private long id;
 
     @Column(name = "QUANTITY", nullable = false)
@@ -27,12 +28,12 @@ public class Order {
     private int alternativeAddressNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
+    @Column(name = "CUSTOMER", nullable = false)
     private Customer customer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @NotNull
-    private Product product;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @Column(name = "ORDER_ITEMS", nullable = false)
+    private List<OrderItem> orderItems;
 
     public long getId() {
         return id;
@@ -82,11 +83,11 @@ public class Order {
         this.customer = customer;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
