@@ -43,20 +43,14 @@ public class OrderService {
             Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomer());
             if (customer.isPresent()) {
                 List<Long> orderItems = orderDTO.getOrderItems();
-                boolean orderItemNotExists = orderItems.stream().anyMatch(orderItem -> !orderRepository.existsById(orderItem));
+                boolean orderItemNotExists = orderItems.stream().anyMatch(orderItem -> !orderItemRepository.existsById(orderItem));
                 if (!orderItemNotExists) {
-                    if (product.get().getInventory()>= orderDTO.getQuantity()){
-                        Order order = orderMapper.DtoToOrder(orderDTO);
-                        orderRepository.save(order);
-                        productRepository.updateInventory((product.get().getInventory() - orderDTO.getQuantity()), product.get().getId());//Update product
-                        return "Your Order created successfully!";
-                    }else{
-                        return "Order quantity is greater than product inventory.";
-                    }
+                    Order order = orderMapper.DtoToOrder(orderDTO);
+                    orderRepository.save(order);
+                    return "Your Order created successfully!";
                 } else {
-                    return "Product not exists.";
+                    return "orderItem not exists.";
                 }
-
             } else {
                 return "Customer not exists.";
             }

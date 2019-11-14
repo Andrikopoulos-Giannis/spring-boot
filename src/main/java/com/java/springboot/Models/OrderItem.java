@@ -1,6 +1,7 @@
 package com.java.springboot.Models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Entity
@@ -20,11 +21,10 @@ public class OrderItem {
     private float amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "PRODUCT", nullable = false)
+    @NotNull
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "ORDER", nullable = false)
     private Order order;
 
     public Long getId() {

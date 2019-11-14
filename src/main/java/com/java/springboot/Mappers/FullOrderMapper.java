@@ -21,9 +21,6 @@ public class FullOrderMapper {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
-    @Autowired
-    private OrderItemRepository orderItemRepository;
-
     public FullOrderDTO orderToDto(Order order){
         FullOrderDTO fullOrderDTO = new FullOrderDTO();
         fullOrderDTO.setId(order.getId());

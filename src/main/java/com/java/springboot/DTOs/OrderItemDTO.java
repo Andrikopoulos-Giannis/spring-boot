@@ -10,13 +10,11 @@ public class OrderItemDTO {
     @Positive
     private int quantity;
 
-    @NotNull
     private float amount;
 
     @NotNull
     private Long product;
 
-    @NotNull
     private Long order;
 
     public Long getId() {

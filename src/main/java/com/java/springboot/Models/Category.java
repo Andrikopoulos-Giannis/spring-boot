@@ -19,7 +19,6 @@ public class Category {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "PARENT_CATEGORY")
     private Category parentCategory;
 
     @OneToMany(mappedBy = "parentCategory", fetch = FetchType.LAZY)

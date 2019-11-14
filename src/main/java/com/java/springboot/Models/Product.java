@@ -3,6 +3,7 @@ package com.java.springboot.Models;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,7 @@ public class Product {
     private int inventory;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "CATEGORY", nullable = false)
+    @NotNull
     private Category category;
 
     @OneToMany(mappedBy = "product")

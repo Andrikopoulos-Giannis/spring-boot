@@ -33,7 +33,7 @@ public class OrderItemMapper {
         orderItem.setId(orderItemDTO.getId());
         orderItem.setAmount(orderItemDTO.getAmount());
         orderItem.setQuantity(orderItemDTO.getQuantity());
-        orderItem.setOrder(orderRepository.findById(orderItemDTO.getOrder()).get());
+        orderItem.setOrder(orderItemDTO.getOrder()!= null ? orderRepository.findById(orderItemDTO.getOrder()).get():null);
         orderItem.setProduct(productRepository.findById(orderItemDTO.getProduct()).get());
 
         return orderItem;
