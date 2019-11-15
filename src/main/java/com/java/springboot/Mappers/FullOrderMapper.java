@@ -27,7 +27,6 @@ public class FullOrderMapper {
         fullOrderDTO.setAlternativeAddress(order.getAlternativeAddress());
         fullOrderDTO.setAlternativeAddressNumber(order.getAlternativeAddressNumber());
         fullOrderDTO.setAmount(order.getAmount());
-        fullOrderDTO.setQuantity(order.getQuantity());
         fullOrderDTO.setCustomer(customerMapper.customerToDTO(order.getCustomer()));
         List<OrderItemDTO> orderItems = new ArrayList<>();
         order.getOrderItems().forEach(orderItem -> orderItems.add(orderItemMapper.orderItemToDto(orderItem)));

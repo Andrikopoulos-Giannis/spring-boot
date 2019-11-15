@@ -2,6 +2,7 @@ package com.java.springboot.DTOs;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -24,7 +25,7 @@ public class OrderDTO {
     @NotNull
     private Long customer;
 
-    @NotNull
+    @NotEmpty
     private List<Long> orderItems;
 
     public long getId() {

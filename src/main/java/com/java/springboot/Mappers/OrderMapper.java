@@ -26,7 +26,6 @@ public class OrderMapper {
         order.setAlternativeAddressNumber(orderDTO.getAlternativeAddressNumber());
         order.setAlternativeAddress(orderDTO.getAlternativeAddress());
         order.setAmount(orderDTO.getAmount());
-        order.setQuantity(orderDTO.getQuantity());
         order.setCustomer(customerRepository.findById(orderDTO.getCustomer()).get());
         List<OrderItem> orderItems = new ArrayList<>();
         orderDTO.getOrderItems().forEach(orderItemId -> orderItems.add(orderItemRepository.findById(orderItemId).get()));
@@ -39,7 +38,6 @@ public class OrderMapper {
 
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
-        orderDTO.setQuantity(order.getQuantity());
         orderDTO.setAlternativeAddress(order.getAlternativeAddress());
         orderDTO.setAlternativeAddressNumber(order.getAlternativeAddressNumber());
         orderDTO.setAmount(order.getAmount());

@@ -15,10 +15,7 @@ public class Order {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "QUANTITY", nullable = false)
-    private int quantity;
-
-    @Column(name = "AMOUNT", nullable = false)
+    @Column(name = "AMOUNT")
     private float amount;
 
     @Column(name = "ALTERNATIVE_ADDRESS")
@@ -33,7 +30,7 @@ public class Order {
     private Customer customer;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    @Column(name = "ORDER_ITEMS", nullable = false)
+    @Column(name = "ORDER_ITEMS")
     private List<OrderItem> orderItems;
 
     public long getId() {
@@ -42,14 +39,6 @@ public class Order {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public float getAmount() {

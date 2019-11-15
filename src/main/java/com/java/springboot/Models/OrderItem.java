@@ -25,6 +25,7 @@ public class OrderItem {
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
     private Order order;
 
     public Long getId() {
