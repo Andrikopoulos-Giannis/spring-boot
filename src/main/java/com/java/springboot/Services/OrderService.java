@@ -7,11 +7,8 @@ import com.java.springboot.DTOs.OrderDTO;
 import com.java.springboot.DTOs.FullOrderDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
 import com.java.springboot.JpaRepositories.OrderRepository;
-import com.java.springboot.JpaRepositories.ProductRepository;
 import com.java.springboot.Models.Customer;
 import com.java.springboot.Models.Order;
-import com.java.springboot.Models.OrderItem;
-import com.java.springboot.Models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
