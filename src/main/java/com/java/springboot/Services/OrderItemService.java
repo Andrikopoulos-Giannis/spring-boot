@@ -2,8 +2,11 @@ package com.java.springboot.Services;
 
 import com.java.springboot.DTOs.OrderItemDTO;
 import com.java.springboot.JpaRepositories.OrderItemRepository;
+import com.java.springboot.JpaRepositories.OrderRepository;
 import com.java.springboot.JpaRepositories.ProductRepository;
 import com.java.springboot.Mappers.OrderItemMapper;
+import com.java.springboot.Models.Order;
+import com.java.springboot.Models.OrderItem;
 import com.java.springboot.Models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,24 +26,37 @@ public class OrderItemService {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     @Transactional
     public String create(OrderItemDTO orderItemDTO){
-        //try {
+        try {
             Optional<Product> product = productRepository.findById(orderItemDTO.getProduct());
-            if (product.isPresent()){
-                if (product.get().getInventory()>= orderItemDTO.getQuantity()){
-                    orderItemMapper.orderItemToDto(orderItemRepository.save(orderItemMapper.DtoToOrderItem(orderItemDTO)));
-                    productRepository.updateInventory((product.get().getInventory() - orderItemDTO.getQuantity()), orderItemDTO.getProduct());
-                    return "OrderItem saved Successfully!";
+            Optional<Order> order = orderRepository.findById(orderItemDTO.getOrder());
+
+            if (order.isPresent()){
+                if (product.isPresent()){
+                    if (product.get().getInventory()>= orderItemDTO.getQuantity()){
+                        orderItemDTO.setAmount(orderItemDTO.getQuantity() * product.get().getPrice());
+                        orderItemRepository.save(orderItemMapper.DtoToOrderItem(orderItemDTO));
+                        productRepository.updateInventory((product.get().getInventory() - orderItemDTO.getQuantity()), orderItemDTO.getProduct());
+                        float amount = order.get().getAmount() + orderItemDTO.getAmount();
+                        orderRepository.updateAmount(amount, orderItemDTO.getOrder());
+                        return "OrderItem saved Successfully!";
+                    }else{
+                        return "Quantity of product is greater than inventory";
+                    }
                 }else{
-                    return "Quantity of product is greater than inventory";
+                    return "Product not exists";
                 }
             }else{
-                return "Product not exists";
+                return "order not exists";
             }
-        //}catch (Exception ex){
-          //  return "something went wrong";
-        //}
+
+        }catch (Exception ex){
+            return "something went wrong";
+        }
     }
 
     @Transactional

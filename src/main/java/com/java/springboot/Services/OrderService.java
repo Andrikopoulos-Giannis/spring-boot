@@ -1,6 +1,5 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.JpaRepositories.OrderItemRepository;
 import com.java.springboot.Mappers.FullOrderMapper;
 import com.java.springboot.Mappers.OrderMapper;
 import com.java.springboot.DTOs.OrderDTO;
@@ -26,9 +25,6 @@ public class OrderService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private OrderItemRepository orderItemRepository;
-
-    @Autowired
     private OrderMapper orderMapper;
 
     @Autowired
@@ -36,25 +32,18 @@ public class OrderService {
 
     @Transactional
     public String create(OrderDTO orderDTO) {
-        try {
+        //try {
             Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomer());
             if (customer.isPresent()) {
-                List<Long> orderItems = orderDTO.getOrderItems();
-                boolean orderItemNotExists = orderItems.stream().anyMatch(orderItem -> !orderItemRepository.existsById(orderItem));
-                if (!orderItemNotExists) {
-                    Order order = orderMapper.DtoToOrder(orderDTO);
-                    orderRepository.save(order);
-                    return "Your Order created successfully!";
-                } else {
-                    return "orderItem not exists.";
-                }
+                Order order = orderMapper.DtoToOrder(orderDTO);
+                orderRepository.save(order);
+                return "Your Order created successfully!";
             } else {
                 return "Customer not exists.";
             }
-        } catch (Exception ex) {
-            return "Something went wrong";
-
-        }
+        //} catch (Exception ex) {
+        //    return "Something went wrong";
+        //}
     }
 
     @Transactional

@@ -2,17 +2,12 @@ package com.java.springboot.DTOs;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.util.List;
 
 public class OrderDTO {
 
     private long id;
-
-    @Positive
-    private int quantity;
 
     @NotNull
     private float amount;
@@ -25,7 +20,6 @@ public class OrderDTO {
     @NotNull
     private Long customer;
 
-    @NotEmpty
     private List<Long> orderItems;
 
     public long getId() {
@@ -34,14 +28,6 @@ public class OrderDTO {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public float getAmount() {
