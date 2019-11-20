@@ -1,5 +1,6 @@
 package com.java.springboot.Services;
 
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.DTOs.OrderItemDTO;
 import com.java.springboot.JpaRepositories.OrderItemRepository;
 import com.java.springboot.JpaRepositories.OrderRepository;
@@ -30,7 +31,8 @@ public class OrderItemService {
     private OrderRepository orderRepository;
 
     @Transactional
-    public String create(OrderItemDTO orderItemDTO){
+    public GenericResponceDTO create(OrderItemDTO orderItemDTO){
+        GenericResponceDTO responceDTO = new GenericResponceDTO();
         try {
             Optional<Product> product = productRepository.findById(orderItemDTO.getProduct());
             Optional<Order> order = orderRepository.findById(orderItemDTO.getOrder());
@@ -43,19 +45,25 @@ public class OrderItemService {
                         productRepository.updateInventory((product.get().getInventory() - orderItemDTO.getQuantity()), orderItemDTO.getProduct());
                         float amount = order.get().getAmount() + orderItemDTO.getAmount();
                         orderRepository.updateAmount(amount, orderItemDTO.getOrder());
-                        return "OrderItem saved Successfully!";
+                        responceDTO.setMessage("OrderItem saved Successfully!");
+                        responceDTO.setObject(orderItemDTO);
+                        return responceDTO;
                     }else{
-                        return "Quantity of product is greater than inventory";
+                        responceDTO.setMessage("Quantity of product is greater than inventory");
+                        return responceDTO;
                     }
                 }else{
-                    return "Product not exists";
+                    responceDTO.setMessage("Product not exists");
+                    return responceDTO;
                 }
             }else{
-                return "order not exists";
+                responceDTO.setMessage("order not exists");
+                return responceDTO;
             }
 
         }catch (Exception ex){
-            return "something went wrong";
+            responceDTO.setMessage("something went wrong");
+            return responceDTO;
         }
     }
 

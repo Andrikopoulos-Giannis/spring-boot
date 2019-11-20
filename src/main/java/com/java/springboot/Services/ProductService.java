@@ -1,5 +1,6 @@
 package com.java.springboot.Services;
 
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.JpaRepositories.CategoryRepository;
 import com.java.springboot.Mappers.ProductMapper;
 import com.java.springboot.DTOs.ProductDTO;
@@ -25,8 +26,8 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     @Transactional
-    public String create(ProductDTO productDTO) {
-
+    public GenericResponceDTO create(ProductDTO productDTO) {
+        GenericResponceDTO responceDTO = new GenericResponceDTO();
         try{
             Optional<Product> prod = productRepository.findByProduct_code(productDTO.getProductCode());
             if (!prod.isPresent()){
@@ -34,16 +35,21 @@ public class ProductService {
                 if (category.isPresent()) {
                     Product product = productMapper.DtoToProduct(productDTO);
                     productRepository.save(product);
-                    return "Product saved Successfully!";
+                    responceDTO.setMessage("Product saved Successfully!");
+                    responceDTO.setObject(productDTO);
+                    return responceDTO;
                 }else{
-                    return "Category not exists";
+                    responceDTO.setMessage("Category not exists");
+                    return responceDTO;
                 }
             }else
             {
-                return  "Product already exists.";
+                responceDTO.setMessage("Product already exists");
+                return  responceDTO;
             }
         }catch (Exception ex){
-            return "Something went wrong";
+            responceDTO.setMessage("Something went wrong");
+            return responceDTO;
         }
 
 

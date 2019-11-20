@@ -1,5 +1,6 @@
 package com.java.springboot.Services;
 
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.Mappers.FullOrderMapper;
 import com.java.springboot.Mappers.OrderMapper;
 import com.java.springboot.DTOs.OrderDTO;
@@ -31,19 +32,24 @@ public class OrderService {
     private FullOrderMapper fullOrderMapper;
 
     @Transactional
-    public String create(OrderDTO orderDTO) {
-        //try {
+    public GenericResponceDTO create(OrderDTO orderDTO) {
+        GenericResponceDTO responceDTO = new GenericResponceDTO();
+        try {
             Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomer());
             if (customer.isPresent()) {
                 Order order = orderMapper.DtoToOrder(orderDTO);
                 orderRepository.save(order);
-                return "Your Order created successfully!";
+                responceDTO.setMessage("Your Order created successfully!");
+                responceDTO.setObject(orderDTO);
+                return responceDTO;
             } else {
-                return "Customer not exists.";
+                responceDTO.setMessage("Customer not exists");
+                return responceDTO;
             }
-        //} catch (Exception ex) {
-        //    return "Something went wrong";
-        //}
+        } catch (Exception ex) {
+            responceDTO.setMessage("Something went wrong");
+            return responceDTO;
+        }
     }
 
     @Transactional

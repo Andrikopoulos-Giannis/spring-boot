@@ -1,6 +1,7 @@
 package com.java.springboot.Services;
 
 import com.java.springboot.DTOs.CategoryDTO;
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.JpaRepositories.CategoryRepository;
 import com.java.springboot.Mappers.CategoryMapper;
 import com.java.springboot.Models.Category;
@@ -20,15 +21,18 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     @Transactional
-    public String create(CategoryDTO categoryDTO){
-
+    public GenericResponceDTO create(CategoryDTO categoryDTO){
+        GenericResponceDTO responceDTO = new GenericResponceDTO();
         try {
             Category category = categoryMapper.DtoToCategory(categoryDTO);
             categoryRepository.save(category);
-            return "Category saved Successfully!";
+            responceDTO.setMessage("Category saved Successfully!");
+            responceDTO.setObject(categoryDTO);
+            return responceDTO;
             //TODO:check if exists parentCategory
         }catch (Exception ex){
-            return "Something went wrong";
+            responceDTO.setMessage("Something went wrong");
+            return responceDTO;
         }
     }
 

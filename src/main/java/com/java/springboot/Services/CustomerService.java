@@ -1,5 +1,6 @@
 package com.java.springboot.Services;
 
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.Mappers.CustomerMapper;
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
@@ -19,7 +20,8 @@ public class CustomerService {
     private CustomerMapper customerMapper;
 
     @Transactional
-    public String create(CustomerDTO customerDTO){
+    public GenericResponceDTO create(CustomerDTO customerDTO) {
+        GenericResponceDTO responceDTO = new GenericResponceDTO();
         try {
             Optional<Customer> cust = customerRepository.findByEmail(customerDTO.getEmail());
             if (!cust.isPresent()){
@@ -27,13 +29,19 @@ public class CustomerService {
                 Customer customer = customerMapper.DtoToCustomer(customerDTO);
                 customerRepository.save(customer);
 
-                return "Customer saved successfully!";
+                responceDTO.setMessage("Customer saved successfully!");
+                responceDTO.setObject(customerDTO);
+
+                return responceDTO;
             }else
             {
-                return "Customer already exists.";
+                responceDTO.setMessage("Customer already exists");
+
+                return responceDTO;
             }
         }catch (Exception ex){
-            return "Something went wrong";
+            responceDTO.setMessage("Something went wrong");
+            return responceDTO;
         }
 
     }

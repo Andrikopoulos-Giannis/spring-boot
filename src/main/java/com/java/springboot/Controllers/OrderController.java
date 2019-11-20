@@ -1,6 +1,7 @@
 package com.java.springboot.Controllers;
 
 import com.java.springboot.DTOs.FullOrderDTO;
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.DTOs.OrderDTO;
 import com.java.springboot.Services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping(path = "/addOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@Valid @NotNull @RequestBody OrderDTO orderDTO){
+    public GenericResponceDTO create(@Valid @NotNull @RequestBody OrderDTO orderDTO){
 
         return orderService.create(orderDTO);
 

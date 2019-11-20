@@ -1,6 +1,7 @@
 package com.java.springboot.Controllers;
 
 import com.java.springboot.DTOs.CustomerDTO;
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.Services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,8 +17,8 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping(path = "/SignUp", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@Valid @NotNull @RequestBody CustomerDTO customerDTO){
+    @PostMapping(path = "/SignUp", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericResponceDTO create(@Valid @NotNull @RequestBody CustomerDTO customerDTO) {
 
         return customerService.create(customerDTO);
     }

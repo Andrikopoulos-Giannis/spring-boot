@@ -1,5 +1,6 @@
 package com.java.springboot.Controllers;
 
+import com.java.springboot.DTOs.GenericResponceDTO;
 import com.java.springboot.DTOs.ProductDTO;
 import com.java.springboot.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping(path = "/addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String create(@Valid @NotNull @RequestBody ProductDTO productDTO){
+    public GenericResponceDTO create(@Valid @NotNull @RequestBody ProductDTO productDTO){
 
        return productService.create(productDTO);
 
