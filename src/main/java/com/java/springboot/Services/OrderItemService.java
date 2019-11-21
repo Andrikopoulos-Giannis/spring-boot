@@ -1,6 +1,6 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.DTOs.GenericResponceDTO;
+import com.java.springboot.DTOs.GenericResponseDTO;
 import com.java.springboot.DTOs.OrderItemDTO;
 import com.java.springboot.JpaRepositories.OrderItemRepository;
 import com.java.springboot.JpaRepositories.OrderRepository;
@@ -31,8 +31,8 @@ public class OrderItemService {
     private OrderRepository orderRepository;
 
     @Transactional
-    public GenericResponceDTO create(OrderItemDTO orderItemDTO){
-        GenericResponceDTO responceDTO = new GenericResponceDTO();
+    public GenericResponseDTO create(OrderItemDTO orderItemDTO){
+        GenericResponseDTO responseDTO = new GenericResponseDTO();
         try {
             Optional<Product> product = productRepository.findById(orderItemDTO.getProduct());
             Optional<Order> order = orderRepository.findById(orderItemDTO.getOrder());
@@ -45,33 +45,33 @@ public class OrderItemService {
                         productRepository.updateInventory((product.get().getInventory() - orderItemDTO.getQuantity()), orderItemDTO.getProduct());
                         float amount = order.get().getAmount() + orderItemDTO.getAmount();
                         orderRepository.updateAmount(amount, orderItemDTO.getOrder());
-                        responceDTO.setMessage("OrderItem saved Successfully!");
-                        responceDTO.setObject(orderItemDTO);
-                        return responceDTO;
+                        responseDTO.setMessage("OrderItem saved Successfully!");
+                        responseDTO.setObject(orderItemDTO);
+                        return responseDTO;
                     }else{
-                        responceDTO.setMessage("Quantity of product is greater than inventory");
-                        return responceDTO;
+                        responseDTO.setMessage("Quantity of product is greater than inventory");
+                        return responseDTO;
                     }
                 }else{
-                    responceDTO.setMessage("Product not exists");
-                    return responceDTO;
+                    responseDTO.setMessage("Product not exists");
+                    return responseDTO;
                 }
             }else{
-                responceDTO.setMessage("order not exists");
-                return responceDTO;
+                responseDTO.setMessage("order not exists");
+                return responseDTO;
             }
 
         }catch (Exception ex){
-            responceDTO.setMessage("something went wrong");
-            return responceDTO;
+            responseDTO.setMessage("something went wrong");
+            return responseDTO;
         }
     }
 
     @Transactional
     public OrderItemDTO getOrderItemById(Long orderItemId){
         try {
-            OrderItemDTO orderItemDTO = orderItemMapper.orderItemToDto(orderItemRepository.findById(orderItemId).get());
-            return orderItemDTO;
+            Optional<OrderItem> orderItem = orderItemRepository.findById(orderItemId);
+            return orderItem.map(value -> orderItemMapper.orderItemToDto(value)).orElse(null);
         }catch (Exception ex){
             return null;
         }

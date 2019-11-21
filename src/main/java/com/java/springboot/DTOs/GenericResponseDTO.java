@@ -1,7 +1,7 @@
 package com.java.springboot.DTOs;
 
 
-public class GenericResponceDTO {
+public class GenericResponseDTO {
 
     private String message;
 

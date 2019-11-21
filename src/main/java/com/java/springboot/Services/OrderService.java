@@ -1,6 +1,6 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.DTOs.GenericResponceDTO;
+import com.java.springboot.DTOs.GenericResponseDTO;
 import com.java.springboot.Mappers.FullOrderMapper;
 import com.java.springboot.Mappers.OrderMapper;
 import com.java.springboot.DTOs.OrderDTO;
@@ -32,32 +32,31 @@ public class OrderService {
     private FullOrderMapper fullOrderMapper;
 
     @Transactional
-    public GenericResponceDTO create(OrderDTO orderDTO) {
-        GenericResponceDTO responceDTO = new GenericResponceDTO();
+    public GenericResponseDTO create(OrderDTO orderDTO) {
+        GenericResponseDTO responseDTO = new GenericResponseDTO();
         try {
             Optional<Customer> customer = customerRepository.findById(orderDTO.getCustomer());
             if (customer.isPresent()) {
                 Order order = orderMapper.DtoToOrder(orderDTO);
                 orderRepository.save(order);
-                responceDTO.setMessage("Your Order created successfully!");
-                responceDTO.setObject(orderDTO);
-                return responceDTO;
+                responseDTO.setMessage("Your Order created successfully!");
+                responseDTO.setObject(orderDTO);
+                return responseDTO;
             } else {
-                responceDTO.setMessage("Customer not exists");
-                return responceDTO;
+                responseDTO.setMessage("Customer not exists");
+                return responseDTO;
             }
         } catch (Exception ex) {
-            responceDTO.setMessage("Something went wrong");
-            return responceDTO;
+            responseDTO.setMessage("Something went wrong");
+            return responseDTO;
         }
     }
 
     @Transactional
     public OrderDTO getById(Long orderId){
         try {
-            Order order = orderRepository.findById(orderId).get();
-            OrderDTO orderDTO = orderMapper.OrderToOrderDTO(order);
-            return orderDTO;
+            Optional<Order> order = orderRepository.findById(orderId);
+            return order.map(value -> orderMapper.OrderToOrderDTO(value)).orElse(null);
         }catch (Exception ex){
             return  null;
         }
@@ -67,9 +66,8 @@ public class OrderService {
     @Transactional
     public FullOrderDTO getFullOrderById(Long orderId){
         try {
-            Order order = orderRepository.findById(orderId).get();
-            FullOrderDTO fullOrderDTO = fullOrderMapper.orderToDto(order);
-            return fullOrderDTO;
+            Optional<Order> order = orderRepository.findById(orderId);
+            return order.map(value -> fullOrderMapper.orderToDto(value)).orElse(null);
         }catch (Exception ex){
             return null;
         }

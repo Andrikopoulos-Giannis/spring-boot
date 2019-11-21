@@ -1,6 +1,6 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.DTOs.GenericResponceDTO;
+import com.java.springboot.DTOs.GenericResponseDTO;
 import com.java.springboot.JpaRepositories.CategoryRepository;
 import com.java.springboot.Mappers.ProductMapper;
 import com.java.springboot.DTOs.ProductDTO;
@@ -26,8 +26,8 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     @Transactional
-    public GenericResponceDTO create(ProductDTO productDTO) {
-        GenericResponceDTO responceDTO = new GenericResponceDTO();
+    public GenericResponseDTO create(ProductDTO productDTO) {
+        GenericResponseDTO responseDTO = new GenericResponseDTO();
         try{
             Optional<Product> prod = productRepository.findByProduct_code(productDTO.getProductCode());
             if (!prod.isPresent()){
@@ -35,21 +35,21 @@ public class ProductService {
                 if (category.isPresent()) {
                     Product product = productMapper.DtoToProduct(productDTO);
                     productRepository.save(product);
-                    responceDTO.setMessage("Product saved Successfully!");
-                    responceDTO.setObject(productDTO);
-                    return responceDTO;
+                    responseDTO.setMessage("Product saved Successfully!");
+                    responseDTO.setObject(productDTO);
+                    return responseDTO;
                 }else{
-                    responceDTO.setMessage("Category not exists");
-                    return responceDTO;
+                    responseDTO.setMessage("Category not exists");
+                    return responseDTO;
                 }
             }else
             {
-                responceDTO.setMessage("Product already exists");
-                return  responceDTO;
+                responseDTO.setMessage("Product already exists");
+                return  responseDTO;
             }
         }catch (Exception ex){
-            responceDTO.setMessage("Something went wrong");
-            return responceDTO;
+            responseDTO.setMessage("Something went wrong");
+            return responseDTO;
         }
 
 
@@ -58,10 +58,8 @@ public class ProductService {
     @Transactional
     public ProductDTO getProductById(long productId){
         try{
-            Product product = productRepository.findById(productId).get();
-            ProductDTO productDTO = productMapper.ProductToDTO(product);
-
-            return productDTO;
+            Optional<Product> product = productRepository.findById(productId);
+            return product.map(value -> productMapper.ProductToDTO(value)).orElse(null);
         }catch (Exception ex){
             return null;
         }

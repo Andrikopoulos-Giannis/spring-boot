@@ -1,7 +1,7 @@
 package com.java.springboot.Controllers;
 
 import com.java.springboot.DTOs.CategoryDTO;
-import com.java.springboot.DTOs.GenericResponceDTO;
+import com.java.springboot.DTOs.GenericResponseDTO;
 import com.java.springboot.Services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping(path = "/addCategory", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponceDTO create(@Valid @RequestBody CategoryDTO categoryDTO){
+    public GenericResponseDTO create(@Valid @RequestBody CategoryDTO categoryDTO){
         return categoryService.create(categoryDTO);
     }
 

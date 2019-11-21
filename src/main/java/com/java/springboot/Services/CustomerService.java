@@ -1,6 +1,6 @@
 package com.java.springboot.Services;
 
-import com.java.springboot.DTOs.GenericResponceDTO;
+import com.java.springboot.DTOs.GenericResponseDTO;
 import com.java.springboot.Mappers.CustomerMapper;
 import com.java.springboot.DTOs.CustomerDTO;
 import com.java.springboot.JpaRepositories.CustomerRepository;
@@ -20,8 +20,8 @@ public class CustomerService {
     private CustomerMapper customerMapper;
 
     @Transactional
-    public GenericResponceDTO create(CustomerDTO customerDTO) {
-        GenericResponceDTO responceDTO = new GenericResponceDTO();
+    public GenericResponseDTO create(CustomerDTO customerDTO) {
+        GenericResponseDTO responseDTO = new GenericResponseDTO();
         try {
             Optional<Customer> cust = customerRepository.findByEmail(customerDTO.getEmail());
             if (!cust.isPresent()){
@@ -29,19 +29,19 @@ public class CustomerService {
                 Customer customer = customerMapper.DtoToCustomer(customerDTO);
                 customerRepository.save(customer);
 
-                responceDTO.setMessage("Customer saved successfully!");
-                responceDTO.setObject(customerDTO);
+                responseDTO.setMessage("Customer saved successfully!");
+                responseDTO.setObject(customerDTO);
 
-                return responceDTO;
+                return responseDTO;
             }else
             {
-                responceDTO.setMessage("Customer already exists");
+                responseDTO.setMessage("Customer already exists");
 
-                return responceDTO;
+                return responseDTO;
             }
         }catch (Exception ex){
-            responceDTO.setMessage("Something went wrong");
-            return responceDTO;
+            responseDTO.setMessage("Something went wrong");
+            return responseDTO;
         }
 
     }
@@ -50,9 +50,8 @@ public class CustomerService {
     public CustomerDTO getById(Long customerId){
 
         try {
-            Customer customer = customerRepository.findById(customerId).get();
-            CustomerDTO customerDTO = customerMapper.customerToDTO(customer);
-            return customerDTO;
+            Optional<Customer> customer = customerRepository.findById(customerId);
+            return customer.map(value -> customerMapper.customerToDTO(value)).orElse(null);
         }catch (Exception ex){
             return null;
         }

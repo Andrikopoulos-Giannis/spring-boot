@@ -1,6 +1,6 @@
 package com.java.springboot.Controllers;
 
-import com.java.springboot.DTOs.GenericResponceDTO;
+import com.java.springboot.DTOs.GenericResponseDTO;
 import com.java.springboot.DTOs.OrderItemDTO;
 import com.java.springboot.Services.OrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class OrderItemController {
     private OrderItemService orderItemService;
 
     @PostMapping(path = "/addOrderItem", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public GenericResponceDTO create(@Valid @RequestBody OrderItemDTO orderItemDTO){
+    public GenericResponseDTO create(@Valid @RequestBody OrderItemDTO orderItemDTO){
         return orderItemService.create(orderItemDTO);
     }
 
